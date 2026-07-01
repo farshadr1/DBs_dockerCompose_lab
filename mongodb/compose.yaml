@@ -1,0 +1,16 @@
+services:
+  db:
+    container_name: mongodb
+    image: mongodb/mongodb-community-server:8.2-ubuntu2204-slim
+    hostname: monogo
+    ports:
+      - 27017:27017
+    restart: always
+    networks:
+      - backend
+    volumes:
+      - mongo-data:/data/db  
+volumes:
+  mongo-data:
+networks:
+  backend: 
