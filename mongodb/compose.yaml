@@ -1,6 +1,6 @@
+name: mongodb
 services:
   mongodb:
-    container_name: mongodb
     image: mongodb/mongodb-community-server:8.2-ubuntu2204-slim
     hostname: mongodb
     ports:
@@ -11,7 +11,13 @@ services:
     networks:
       - backend
     volumes:
-      - mongo-data:/data/db  
+      - type: bind
+        source: ./mongodb/init.js
+        target: /docker-entrypoint-initdb.d/init.js
+        read_only: true
+      - type: volume
+        source: mongo-data
+        target: /data/db  
     
 volumes:
   mongo-data:
