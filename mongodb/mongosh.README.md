@@ -6,6 +6,8 @@
 | Show current database| `db`|
 | Switch to a database| `use `|
 | switch user | `use admin`|
+| Create a database user| `db.createUser({user:"appuser", pwd:"secret", roles:[{role:"readWrite", db:"inventory"}]})` |
+| List users in current database| `show users`|
 | Verify authenticated| `db.runCommand({ connectionStatus: 1 })`|
 | authentucate| `db.auth("admin", "secretpassword")`|
 | List collections in current database| `show collections`|
@@ -21,8 +23,6 @@
 | Delete multiple documents| `db.products.deleteMany({stock:0})`|
 | Count documents| `db.products.countDocuments()`|
 | Delete the current database| `db.dropDatabase()`|
-| Create a database user| `db.createUser({user:"appuser", pwd:"secret", roles:[{role:"readWrite", db:"inventory"}]})` |
-| List users in current database| `show users`|
 | Create an index| `db.products.createIndex({name:1})`|
 | List indexes| `db.products.getIndexes()`|
 | Display server status and statistics| `db.serverStatus()`|
