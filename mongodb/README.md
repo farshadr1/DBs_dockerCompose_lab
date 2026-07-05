@@ -1,6 +1,6 @@
 # Mongodb Containerize Project
 
-## 1. Configure the container (Docker Compose)
+## 1. Configure the container with Docker Compose
 
 - using official mongodb-community image in ubuntu slimm
 - expose 27017 port
