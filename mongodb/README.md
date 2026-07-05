@@ -24,7 +24,7 @@ Sometimes you need to configure an already-running database.
 
 Enter the container:
 ```bash
-docker compose exec mongodb mongosh
+docker exec -it mongodb-mongodb-1 mongosh
 ```
 Login:
 ```bash
