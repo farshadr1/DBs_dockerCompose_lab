@@ -8,33 +8,28 @@
 ## FarshadRavaee@gmail.com (2026-07-05)
 #######################################
 
-source ../.env
+#-------------
+#set -euo pipefail enables three useful Bash safety features:
+#-e: exit immediately if a command fails.
+#-u: treat the use of an unset variable as an error.
+#-o pipefail: make a pipeline fail if any command in it fails, not just the last one.
+#-------------
+set -euo pipefail
 
-echo "Backing up MongoDB database..."
-container_name="mongodb-mongodb-1"
+STAMP=$(date +%F-%R)
+DEST="/backup_files/$STAMP"
 
-# chenck if the container is running
-container=$(docker ps --filter "name=$container_name" --filter "health=healthy" --quiet)
+mkdir -p "$DEST"
 
-if [ -z "$container" ]; then
-    echo "Container is not running or not healthy."
-    exit 1
-fi
-
-# use mongodump to backup
-if ! docker exec $container_name mongodump \
-  --username $MONGODB_INITDB_ROOT_USERNAME \
-  --password $MONGODB_INITDB_ROOT_PASSWORD \
+mongodump \
+  --host mongodb \
+  --username "$MONGODB_INITDB_ROOT_USERNAME" \
+  --password "$MONGODB_INITDB_ROOT_PASSWORD" \
   --authenticationDatabase admin \
-  --out /tmp/backup
-then
-  echo "Error: Failed to backup MongoDB database."
-  exit 1
-fi
+  --out "$DEST"
 
-# copy backup from container to host
-if ! docker cp $container_name:/tmp/backup ./backups
-then
-  echo "Error: Failed to copy backup from container to host."
-  exit 1
+if [ $? -eq 0 ]; then
+  echo "Backup created in $DEST"
+else
+  echo "Error: Backup not created!"
 fi

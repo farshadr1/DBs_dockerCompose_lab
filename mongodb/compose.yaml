@@ -24,6 +24,21 @@ services:
       - type: volume
         source: mongo-data
         target: /data/db  
+  tools:
+    build:
+      context: ./tools
+      dockerfile: Dockerfile.mongoTools
+    hostname: tools
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+    networks:
+      - backend
+    volumes:
+      - type: bind
+        source: ./backup_files/
+        target: /backup_files/
     
 volumes:
   mongo-data:
