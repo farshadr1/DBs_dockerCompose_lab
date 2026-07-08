@@ -18,8 +18,8 @@ fi
 
 mongorestore \
   --host mongodb \
-  --username "$MONGO_INITDB_ROOT_USERNAME" \
-  --password "$MONGO_INITDB_ROOT_PASSWORD" \
+  --username "$MONGODB_INITDB_ROOT_USERNAME" \
+  --password "$MONGODB_INITDB_ROOT_PASSWORD" \
   --authenticationDatabase admin \
   --drop "/backup_files/$1"
 
