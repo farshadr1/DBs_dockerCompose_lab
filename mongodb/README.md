@@ -1,14 +1,17 @@
 # Mongodb Containerize Project
+this is a learning project to use mongodb database. and try to use best practice methods.
 
 ## 1. Configure the container with Docker Compose
 
-- using official mongodb-community image in ubuntu slimm
-- expose 27017 port
-- set environment parametes 
-- set restart policy
-- bind init.js for config
-- persist database volumes 
-- set using network
+There is two container:
+1.mongoDb server:
+    base official image: mongodb/mongodb-community-server:8.2-ubuntu2204-slim
+    its use for Database server on port "27017". with hostname "mongo"
+2.mongo tools:
+    for backup and restore from Database Server 
+
+use `docker compose up --build -d`
+to run the project.    
 
 
 ## 2. Initialize MongoDB
@@ -63,4 +66,14 @@ db.products.insertOne({
 })
 ```
 
-## A best practice to remember
+## how to use backup and restore
+this need to run the tools service.
+
+1. for backup :
+    `docker compose run --rm tools ./backup.sh`
+    backed up directory store in ./backup_files with stamp time name.
+    this directory bind mount with the tools container
+
+2. for restore :
+    `docker compose run --rm tools ./restore.sh 2026-07-08-08:50`
+        
