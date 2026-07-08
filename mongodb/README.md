@@ -217,36 +217,6 @@ use admin
 db.auth("admin", "secretpassword")
 ```
 
-### Common Commands
-
-| Operation | Command |
-|-----------|---------|
-| **List all databases** | `show dbs` |
-| **Show current database** | `db` |
-| **Switch database** | `use inventory` |
-| **Switch to admin** | `use admin` |
-| **Create database user** | `db.createUser({user:"appuser", pwd:"secret", roles:[{role:"readWrite", db:"inventory"}]})` |
-| **List users** | `show users` |
-| **Verify authentication** | `db.runCommand({ connectionStatus: 1 })` |
-| **Authenticate user** | `db.auth("appuser", "password")` |
-| **List collections** | `show collections` |
-| **Create collection** | `db.createCollection("products")` |
-| **Delete collection** | `db.products.drop()` |
-| **Insert one document** | `db.products.insertOne({name:"Laptop", price:1200})` |
-| **Insert multiple** | `db.products.insertMany([{name:"Mouse"}, {name:"Keyboard"}])` |
-| **Find all documents** | `db.products.find()` |
-| **Find one document** | `db.products.findOne()` |
-| **Query with filter** | `db.products.find({price: {$gt: 100}})` |
-| **Update one document** | `db.products.updateOne({name:"Laptop"}, {$set:{price:1500}})` |
-| **Delete one document** | `db.products.deleteOne({name:"Mouse"})` |
-| **Delete multiple** | `db.products.deleteMany({stock:0})` |
-| **Count documents** | `db.products.countDocuments()` |
-| **Delete database** | `db.dropDatabase()` |
-| **Create index** | `db.products.createIndex({name:1})` |
-| **List indexes** | `db.products.getIndexes()` |
-| **Server statistics** | `db.serverStatus()` |
-| **Exit mongosh** | `exit` |
-
 For comprehensive command reference, see `mongosh.README.md`.
 
 ---
