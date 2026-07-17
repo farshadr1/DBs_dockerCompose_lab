@@ -1,0 +1,21 @@
+name: postgres
+services:
+  postgres:
+    image: docker pull postgres:18.4
+    hostname: postgres
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - backend
+    volumes:
+      - type: volume
+        source: postgres-data
+        target: /var/lib/postgresql/data 
+
+networks:
+  backend:
+volumes:
+  postgres-data:
