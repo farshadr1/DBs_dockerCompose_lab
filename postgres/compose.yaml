@@ -1,7 +1,7 @@
 name: postgres
 services:
   postgres:
-    image: docker pull postgres:18.4
+    image: postgres:18.4
     hostname: postgres
     ports:
       - "5432:5432"
@@ -12,10 +12,10 @@ services:
       - backend
     volumes:
       - type: volume
-        source: postgres-data
-        target: /var/lib/postgresql/data 
+        source: pg-data
+        target: /var/lib/postgresql
 
 networks:
   backend:
 volumes:
-  postgres-data:
+  pg-data:
